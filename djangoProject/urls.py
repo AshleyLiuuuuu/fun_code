@@ -20,6 +20,5 @@ from . import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index.index),
-    path('polls/', include('polls.urls')),
     #path('blog/', include('j4blog.urls')),
 ]
