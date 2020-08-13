@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 
-from .models import Article, Comment, Flag, Category
+from .models import Article, Tag#, Comment, Flag, Category
 
 
 # class ArticleAdmin(admin.ModelAdmin):
@@ -18,7 +18,6 @@ from .models import Article, Comment, Flag, Category
 
 #admin.site.register(Article, ArticleAdmin)
 admin.site.register(Article)
-admin.site.register(Comment)
-admin.site.register(Flag)
-admin.site.register(Category)
-#
+# admin.site.register(Comment)
+admin.site.register(Tag)
+# admin.site.register(Category)
