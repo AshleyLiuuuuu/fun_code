@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ article.title }} | Article Page</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'j4blog/style.css' %}">
+  </head>
+  <body>
+  <div><a href="{% url 'admin:index' %}">Administration</a></div>
+  <div><a href="{% url 'j4blog:index' %}">j4blog</a></div>
+    <article>
+        <h1>{{ article.title }}</h1>
+        <date>{{ article.pub_date }}</date>
+        <div>分类：<a href="{% url 'j4blog:category' article.category.path %}">{{ article.category.name }}</a></div>
+        <text>{{ article.content }}</text>
+        <date>最后编辑于 {{ article.last_edit_date }}</date>
+        {% if article.tag.count %}<tag>标签：
+            {% for t in article.tag.all %}
+                <a href={% url 'j4blog:tag' t.path %}>{{ t.name }}</a></tag>
+            {% endfor %}
+        {% endif %}
+    </article>
+  {% if article.comment_set %}
+  {% else %}
+      <div>暂无评论</div>
+  {% endif %}
+    <form action="{% url 'j4blog:article' article.path %}" method="post">
+        {% csrf_token %}
+        <input name="nickname" type="text" />
+        <input type="email" />
+        <input name="domain" type="text" />
+        <input type="submit" value="评论" disabled />
+    </form>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ tag.name }} | Tag Page</title>
+      {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'j4blog/style.css' %}">
+  </head>
+  <body>
+  <h1>标签：{{ tag.name }}</h1>
+  {% if tag.description %}
+      <div>{{ tag.description }}</div>
+  {% endif %}
+  {% if tag.article_set.count %}
+      {% for article in tag.article_set.all %}
+          <article>
+              <h1><a href="{% url 'j4blog:article' article.title %}">{{ article.title }}</a></h1>
+              <p>{{ article.content }}</p>
+          </article>
+      {% endfor %}
+{% else %}
+    <p>No articles are available.</p>
+{% endif %}
+  </body>
+</html>

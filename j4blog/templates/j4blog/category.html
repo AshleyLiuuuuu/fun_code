@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ category.name }} | Category Page</title>
+      {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'j4blog/style.css' %}">
+  </head>
+  <body>
+  <h1>标签：{{ category.name }}</h1>
+  {% if category.description %}
+      <div>{{ category.description }}</div>
+  {% endif %}
+  {% if category.article_set.count %}
+      {% for article in category.article_set.all %}
+          <article>
+              <h1><a href="{% url 'j4blog:article' article.title %}">{{ article.title }}</a></h1>
+              <p>{{ article.content }}</p>
+          </article>
+      {% endfor %}
+{% else %}
+    <p>No articles are available.</p>
+{% endif %}
+  </body>
+</html>

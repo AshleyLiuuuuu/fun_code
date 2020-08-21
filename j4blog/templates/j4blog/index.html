@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Index Page</title>
+      {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'j4blog/style.css' %}">
+  </head>
+  <body>
+  {% if article_list %}
+    {% for article in article_list %}
+        <article>
+            <h1><a href="{% url "j4blog:article" article.path %}">{{ article.title }}</a></h1>
+            {% if article.content %}
+            <p>{{ article.content }}</p>
+                {% else %}
+                <p>无内容</p>
+        {% endif %}
+        </article>
+    {% endfor %}
+{% else %}
+    <p>No articles are available.</p>
+{% endif %}
+  </body>
+</html>
